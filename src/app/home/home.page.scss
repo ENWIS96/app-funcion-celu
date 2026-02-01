@@ -1,27 +1,139 @@
-#container {
+ion-content {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.main-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.header-section {
   text-align: center;
+  color: white;
+  margin-top: 20px;
+  animation: fadeInDown 0.8s ease-in-out;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  .main-icon {
+    font-size: 80px;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 25px;
+  }
+
+  .credits {
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.85;
+
+    p {
+      margin: 5px 0;
+    }
+
+    .author {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.features-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 10px;
+  margin-bottom: 30px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
+.feature-card {
   margin: 0;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.8s ease-in-out;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  ion-card-content {
+    padding: 25px;
+    text-align: center;
+
+    .feature-icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 10px 0;
+      color: white;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
 }
 
-#container a {
-  text-decoration: none;
+.camera-card {
+  --background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bluetooth-card {
+  --background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.sensors-card {
+  --background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }

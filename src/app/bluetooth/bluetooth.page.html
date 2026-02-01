@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Bluetooth</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="bluetooth-container">
+    <div class="info-section">
+      <ion-icon name="bluetooth" class="page-icon"></ion-icon>
+      <h2>Dispositivos Bluetooth</h2>
+      <p>Escanea y conecta dispositivos cercanos</p>
+    </div>
+
+    <div class="status-card">
+      <div class="status-item">
+        <ion-icon [name]="isScanning ? 'radio-button-on' : 'radio-button-off'" 
+                  [class.scanning]="isScanning"></ion-icon>
+        <span>{{ isScanning ? 'Escaneando...' : 'Listo para escanear' }}</span>
+      </div>
+    </div>
+
+    <ion-button expand="block" (click)="startScan()" [disabled]="isScanning" class="action-button">
+      <ion-icon slot="start" name="scan"></ion-icon>
+      {{ isScanning ? 'Escaneando...' : 'Iniciar Escaneo' }}
+    </ion-button>
+
+    <ion-button expand="block" (click)="stopScan()" [disabled]="!isScanning" fill="outline" class="action-button">
+      <ion-icon slot="start" name="stop-circle"></ion-icon>
+      Detener Escaneo
+    </ion-button>
+
+    <div class="devices-section">
+      <h3>Dispositivos Encontrados</h3>
+      <div class="devices-list" *ngIf="devices.length > 0">
+        <ion-card *ngFor="let device of devices" class="device-card">
+          <ion-card-content>
+            <div class="device-info">
+              <ion-icon name="phone-portrait"></ion-icon>
+              <div>
+                <h4>{{ device.device.name || 'Dispositivo desconocido' }}</h4>
+                <p>{{ device.device.deviceId }}</p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="no-devices" *ngIf="devices.length === 0">
+        <ion-icon name="bluetooth-outline"></ion-icon>
+        <p>No se encontraron dispositivos</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

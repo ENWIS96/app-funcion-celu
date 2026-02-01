@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cámara</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="camera-container">
+    <div class="info-section">
+      <ion-icon name="camera" class="page-icon"></ion-icon>
+      <h2>Captura de Fotos</h2>
+      <p>Usa la cámara de tu dispositivo para tomar fotos</p>
+    </div>
+
+    <div class="photo-display" *ngIf="capturedPhoto">
+      <img [src]="capturedPhoto" alt="Foto capturada">
+    </div>
+
+    <div class="photo-placeholder" *ngIf="!capturedPhoto">
+      <ion-icon name="images-outline"></ion-icon>
+      <p>No hay foto capturada</p>
+    </div>
+
+    <ion-button expand="block" (click)="takePicture()" class="action-button">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Tomar Foto
+    </ion-button>
+
+    <ion-button expand="block" (click)="selectFromGallery()" fill="outline" class="action-button">
+      <ion-icon slot="start" name="images"></ion-icon>
+      Galería
+    </ion-button>
+  </div>
+</ion-content>

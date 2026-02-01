@@ -1,0 +1,101 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sensores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="sensors-container">
+    <div class="info-section">
+      <ion-icon name="navigate" class="page-icon"></ion-icon>
+      <h2>Ubicación y Giroscopio</h2>
+      <p>Monitorea los sensores de tu dispositivo</p>
+    </div>
+
+    <!-- Ubicación -->
+    <div class="sensor-card">
+      <div class="sensor-header">
+        <ion-icon name="location"></ion-icon>
+        <h3>Ubicación GPS</h3>
+      </div>
+      <div class="sensor-data" *ngIf="location">
+        <div class="data-item">
+          <span class="label">Latitud:</span>
+          <span class="value">{{ location.latitude.toFixed(6) }}°</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Longitud:</span>
+          <span class="value">{{ location.longitude.toFixed(6) }}°</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Precisión:</span>
+          <span class="value">{{ location.accuracy.toFixed(2) }}m</span>
+        </div>
+      </div>
+      <div class="no-data" *ngIf="!location">
+        <p>No hay datos de ubicación</p>
+      </div>
+      <ion-button expand="block" (click)="getLocation()" class="sensor-button">
+        <ion-icon slot="start" name="locate"></ion-icon>
+        Obtener Ubicación
+      </ion-button>
+    </div>
+
+    <!-- Giroscopio -->
+    <div class="sensor-card">
+      <div class="sensor-header">
+        <ion-icon name="compass"></ion-icon>
+        <h3>Giroscopio</h3>
+      </div>
+      <div class="sensor-data" *ngIf="gyroscope">
+        <div class="data-item">
+          <span class="label">Eje X:</span>
+          <span class="value">{{ gyroscope.x.toFixed(3) }}</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Eje Y:</span>
+          <span class="value">{{ gyroscope.y.toFixed(3) }}</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Eje Z:</span>
+          <span class="value">{{ gyroscope.z.toFixed(3) }}</span>
+        </div>
+      </div>
+      <div class="no-data" *ngIf="!gyroscope">
+        <p>No hay datos del giroscopio</p>
+      </div>
+      <ion-button expand="block" (click)="toggleGyroscope()" [color]="isGyroActive ? 'danger' : 'primary'" class="sensor-button">
+        <ion-icon slot="start" [name]="isGyroActive ? 'stop-circle' : 'play-circle'"></ion-icon>
+        {{ isGyroActive ? 'Detener' : 'Iniciar' }} Giroscopio
+      </ion-button>
+    </div>
+
+    <!-- Acelerómetro -->
+    <div class="sensor-card">
+      <div class="sensor-header">
+        <ion-icon name="speedometer"></ion-icon>
+        <h3>Acelerómetro</h3>
+      </div>
+      <div class="sensor-data" *ngIf="accelerometer">
+        <div class="data-item">
+          <span class="label">Eje X:</span>
+          <span class="value">{{ accelerometer.x.toFixed(3) }}</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Eje Y:</span>
+          <span class="value">{{ accelerometer.y.toFixed(3) }}</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Eje Z:</span>
+          <span class="value">{{ accelerometer.z.toFixed(3) }}</span>
+        </div>
+      </div>
+      <div class="no-data" *ngIf="!accelerometer">
+        <p>No hay datos del acelerómetro</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

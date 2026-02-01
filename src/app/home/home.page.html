@@ -1,20 +1,50 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      App Función Celu
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="main-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <ion-icon name="phone-portrait-outline" class="main-icon"></ion-icon>
+      <h1>App Función Celu</h1>
+      <p class="subtitle">Explora las funciones de tu dispositivo</p>
+      <div class="credits">
+        <p>Hecha por</p>
+        <p class="author">Luis Ordóñez</p>
+        <p class="author">David Pérez</p>
+      </div>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- Features Grid -->
+    <div class="features-grid">
+      <ion-card button (click)="navigateTo('/camera')" class="feature-card camera-card">
+        <ion-card-content>
+          <ion-icon name="camera" class="feature-icon"></ion-icon>
+          <h2>Cámara</h2>
+          <p>Captura fotos con tu dispositivo</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card button (click)="navigateTo('/bluetooth')" class="feature-card bluetooth-card">
+        <ion-card-content>
+          <ion-icon name="bluetooth" class="feature-icon"></ion-icon>
+          <h2>Bluetooth</h2>
+          <p>Conecta dispositivos cercanos</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card button (click)="navigateTo('/sensors')" class="feature-card sensors-card">
+        <ion-card-content>
+          <ion-icon name="navigate" class="feature-icon"></ion-icon>
+          <h2>Sensores</h2>
+          <p>Ubicación y giroscopio</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
