@@ -1,0 +1,7 @@
+{
+  "name": "app-funcion-celu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
