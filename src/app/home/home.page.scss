@@ -1,5 +1,5 @@
 ion-content {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --background: linear-gradient(135deg, #FFD54F 0%, #FF8F00 100%);
 }
 
 .main-container {
@@ -96,15 +96,15 @@ ion-content {
 }
 
 .camera-card {
-  --background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #FFF59D 0%, #FFD54F 100%);
 }
 
 .bluetooth-card {
-  --background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #FFECB3 0%, #FFB74D 100%);
 }
 
 .sensors-card {
-  --background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  background: linear-gradient(135deg, #FFE082 0%, #FFA726 100%);
 }
 
 @keyframes fadeInDown {

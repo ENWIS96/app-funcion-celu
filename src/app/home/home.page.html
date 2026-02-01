@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="warning">
     <ion-title class="ion-text-center">
-      App Función Celu
+      App de Celular
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,13 +10,13 @@
   <div class="main-container">
     <!-- Header Section -->
     <div class="header-section">
-      <ion-icon name="phone-portrait-outline" class="main-icon"></ion-icon>
-      <h1>App Función Celu</h1>
-      <p class="subtitle">Explora las funciones de tu dispositivo</p>
+      <ion-icon name="desktop-outline" class="main-icon"></ion-icon>
+      <h1>App de Celular</h1>
+      <p class="subtitle">Controla tus presentaciones multimedia con tu celular</p>
       <div class="credits">
         <p>Hecha por</p>
-        <p class="author">Luis Ordóñez</p>
-        <p class="author">David Pérez</p>
+        <p class="author">Freddy Fernandez</p>
+        <p class="author">Julio Sanchez</p>
       </div>
     </div>
 
@@ -24,25 +24,25 @@
     <div class="features-grid">
       <ion-card button (click)="navigateTo('/camera')" class="feature-card camera-card">
         <ion-card-content>
-          <ion-icon name="camera" class="feature-icon"></ion-icon>
-          <h2>Cámara</h2>
-          <p>Captura fotos con tu dispositivo</p>
+          <ion-icon name="qr-code" class="feature-icon"></ion-icon>
+          <h2>Cámara QR</h2>
+          <p>Escanea códigos y captura diapositivas</p>
         </ion-card-content>
       </ion-card>
 
       <ion-card button (click)="navigateTo('/bluetooth')" class="feature-card bluetooth-card">
         <ion-card-content>
           <ion-icon name="bluetooth" class="feature-icon"></ion-icon>
-          <h2>Bluetooth</h2>
-          <p>Conecta dispositivos cercanos</p>
+          <h2>Conectar PC</h2>
+          <p>Conecta con tu computadora</p>
         </ion-card-content>
       </ion-card>
 
       <ion-card button (click)="navigateTo('/sensors')" class="feature-card sensors-card">
         <ion-card-content>
-          <ion-icon name="navigate" class="feature-icon"></ion-icon>
-          <h2>Sensores</h2>
-          <p>Ubicación y giroscopio</p>
+          <ion-icon name="play-forward" class="feature-icon"></ion-icon>
+          <h2>Control Gestual</h2>
+          <p>Cambia diapositivas con el giroscopio</p>
         </ion-card-content>
       </ion-card>
     </div>

@@ -1,56 +1,96 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Bluetooth</ion-title>
+    <ion-title>Conectar Dispositivo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="bluetooth-container">
     <div class="info-section">
-      <ion-icon name="bluetooth" class="page-icon"></ion-icon>
-      <h2>Dispositivos Bluetooth</h2>
-      <p>Escanea y conecta dispositivos cercanos</p>
+      <ion-icon name="desktop" class="page-icon"></ion-icon>
+      <h2>Conectar con PC</h2>
+      <p>Busca y conéctate al dispositivo receptor</p>
     </div>
 
+    <!-- Estado de Bluetooth -->
     <div class="status-card">
       <div class="status-item">
-        <ion-icon [name]="isScanning ? 'radio-button-on' : 'radio-button-off'" 
-                  [class.scanning]="isScanning"></ion-icon>
-        <span>{{ isScanning ? 'Escaneando...' : 'Listo para escanear' }}</span>
+        <ion-icon [name]="isBluetoothEnabled ? 'bluetooth' : 'power'" 
+                  [class.enabled]="isBluetoothEnabled"
+                  [class.disabled]="!isBluetoothEnabled"></ion-icon>
+        <span>Bluetooth: {{ isBluetoothEnabled ? 'Activado' : 'Desactivado' }}</span>
+      </div>
+      <div class="status-item" *ngIf="isScanning">
+        <ion-icon name="radio-button-on" class="scanning"></ion-icon>
+        <span>Escaneando dispositivos...</span>
       </div>
     </div>
 
-    <ion-button expand="block" (click)="startScan()" [disabled]="isScanning" class="action-button">
+    <!-- Botón para activar Bluetooth -->
+    <ion-button expand="block" (click)="enableBluetooth()" *ngIf="!isBluetoothEnabled" color="warning" class="action-button">
+      <ion-icon slot="start" name="power"></ion-icon>
+      Activar Bluetooth
+    </ion-button>
+
+    <!-- Botones de escaneo -->
+    <ion-button expand="block" (click)="startScan()" [disabled]="isScanning || !isBluetoothEnabled" color="warning" class="action-button">
       <ion-icon slot="start" name="scan"></ion-icon>
-      {{ isScanning ? 'Escaneando...' : 'Iniciar Escaneo' }}
+      {{ isScanning ? 'Buscando dispositivos...' : 'Buscar Dispositivos' }}
     </ion-button>
 
-    <ion-button expand="block" (click)="stopScan()" [disabled]="!isScanning" fill="outline" class="action-button">
+    <ion-button expand="block" (click)="stopScan()" [disabled]="!isScanning" fill="outline" color="warning" class="action-button">
       <ion-icon slot="start" name="stop-circle"></ion-icon>
-      Detener Escaneo
+      Detener Búsqueda
     </ion-button>
 
+    <!-- Lista de dispositivos -->
     <div class="devices-section">
-      <h3>Dispositivos Encontrados</h3>
+      <h3>Dispositivos Encontrados ({{ devices.length }})</h3>
       <div class="devices-list" *ngIf="devices.length > 0">
-        <ion-card *ngFor="let device of devices" class="device-card">
+        <ion-card *ngFor="let device of devices" class="device-card" [class.connected]="isConnected(device.device.deviceId)">
           <ion-card-content>
             <div class="device-info">
-              <ion-icon name="phone-portrait"></ion-icon>
-              <div>
-                <h4>{{ device.device.name || 'Dispositivo desconocido' }}</h4>
-                <p>{{ device.device.deviceId }}</p>
+              <ion-icon [name]="isConnected(device.device.deviceId) ? 'bluetooth' : 'phone-portrait'"></ion-icon>
+              <div class="device-details">
+                <h4>{{ getDeviceName(device) }}</h4>
+                <p class="signal-strength" *ngIf="device.rssi">
+                  Señal: {{ device.rssi }} dBm
+                </p>
               </div>
+            </div>
+            
+            <!-- Botones de acción -->
+            <div class="device-actions">
+              <ion-button 
+                *ngIf="!isConnected(device.device.deviceId)"
+                size="small" 
+                (click)="pairDevice(device)"
+                color="primary">
+                <ion-icon slot="start" name="link"></ion-icon>
+                Emparejar
+              </ion-button>
+              
+              <ion-button 
+                *ngIf="isConnected(device.device.deviceId)"
+                size="small" 
+                (click)="disconnectDevice(device)"
+                color="danger"
+                fill="outline">
+                <ion-icon slot="start" name="close-circle"></ion-icon>
+                Desconectar
+              </ion-button>
             </div>
           </ion-card-content>
         </ion-card>
       </div>
       <div class="no-devices" *ngIf="devices.length === 0">
         <ion-icon name="bluetooth-outline"></ion-icon>
-        <p>No se encontraron dispositivos</p>
+        <p *ngIf="!isBluetoothEnabled">Activa el Bluetooth para escanear dispositivos</p>
+        <p *ngIf="isBluetoothEnabled && !isScanning">Presiona "Iniciar Escaneo" para buscar dispositivos</p>
+        <p *ngIf="isScanning">Buscando dispositivos cercanos...</p>
       </div>
     </div>
   </div>

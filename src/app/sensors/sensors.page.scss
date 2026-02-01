@@ -1,5 +1,5 @@
 ion-content {
-  --background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --background: linear-gradient(135deg, #FFD54F 0%, #FF8F00 100%);
 }
 
 .sensors-container {
@@ -97,5 +97,99 @@ ion-content {
     --border-radius: 12px;
     font-weight: 600;
     height: 45px;
+  }
+}
+
+.presentation-status {
+  margin: 15px 0;
+  
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    ion-icon {
+      font-size: 28px;
+    }
+    
+    .label {
+      font-size: 14px;
+      color: #666;
+      margin-right: 8px;
+    }
+    
+    .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #FF8F00;
+    }
+  }
+}
+
+.manual-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  
+  ion-button {
+    flex: 1;
+    --border-radius: 12px;
+    font-weight: 600;
+    height: 45px;
+  }
+}
+
+.control-button {
+  --border-radius: 12px;
+  font-weight: 600;
+  height: 45px;
+  margin: 15px 0;
+}
+
+.instruction-card {
+  background: #FFF9E6;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+  border-left: 4px solid #FF8F00;
+  
+  .instruction-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    
+    ion-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.4;
+      
+      strong {
+        color: #FF8F00;
+      }
+    }
+  }
+}
+
+.gesture-status {
+  margin-top: 12px;
+  text-align: center;
+  
+  ion-badge {
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 20px;
   }
 }

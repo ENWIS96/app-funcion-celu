@@ -1,18 +1,18 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Cámara</ion-title>
+    <ion-title>Cámara QR</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="camera-container">
     <div class="info-section">
-      <ion-icon name="camera" class="page-icon"></ion-icon>
-      <h2>Captura de Fotos</h2>
-      <p>Usa la cámara de tu dispositivo para tomar fotos</p>
+      <ion-icon name="qr-code" class="page-icon"></ion-icon>
+      <h2>Escanear y Capturar</h2>
+      <p>Escanea códigos QR o captura diapositivas</p>
     </div>
 
     <div class="photo-display" *ngIf="capturedPhoto">
@@ -24,14 +24,14 @@
       <p>No hay foto capturada</p>
     </div>
 
-    <ion-button expand="block" (click)="takePicture()" class="action-button">
-      <ion-icon slot="start" name="camera"></ion-icon>
-      Tomar Foto
+    <ion-button expand="block" (click)="takePicture()" color="warning" class="action-button">
+      <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+      Escanear Código QR
     </ion-button>
 
-    <ion-button expand="block" (click)="selectFromGallery()" fill="outline" class="action-button">
-      <ion-icon slot="start" name="images"></ion-icon>
-      Galería
+    <ion-button expand="block" (click)="selectFromGallery()" fill="outline" color="warning" class="action-button">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Capturar Diapositiva
     </ion-button>
   </div>
 </ion-content>

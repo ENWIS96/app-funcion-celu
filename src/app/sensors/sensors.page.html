@@ -1,76 +1,94 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Sensores</ion-title>
+    <ion-title>Control Gestual</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="sensors-container">
     <div class="info-section">
-      <ion-icon name="navigate" class="page-icon"></ion-icon>
-      <h2>Ubicación y Giroscopio</h2>
-      <p>Monitorea los sensores de tu dispositivo</p>
+      <ion-icon name="play-forward" class="page-icon"></ion-icon>
+      <h2>Control de Diapositivas</h2>
+      <p>Usa el giroscopio para controlar tu presentación</p>
     </div>
 
-    <!-- Ubicación -->
+    <!-- Estado de la presentación -->
     <div class="sensor-card">
       <div class="sensor-header">
-        <ion-icon name="location"></ion-icon>
-        <h3>Ubicación GPS</h3>
+        <ion-icon name="document-text"></ion-icon>
+        <h3>Estado de la Presentación</h3>
       </div>
-      <div class="sensor-data" *ngIf="location">
-        <div class="data-item">
-          <span class="label">Latitud:</span>
-          <span class="value">{{ location.latitude.toFixed(6) }}°</span>
+      <div class="presentation-status">
+        <div class="status-item">
+          <ion-icon name="layers" color="warning"></ion-icon>
+          <div>
+            <span class="label">Diapositiva Actual:</span>
+            <span class="value">{{ currentSlide }}</span>
+          </div>
         </div>
-        <div class="data-item">
-          <span class="label">Longitud:</span>
-          <span class="value">{{ location.longitude.toFixed(6) }}°</span>
-        </div>
-        <div class="data-item">
-          <span class="label">Precisión:</span>
-          <span class="value">{{ location.accuracy.toFixed(2) }}m</span>
+        <div class="status-item">
+          <ion-icon name="time" color="warning"></ion-icon>
+          <div>
+            <span class="label">Tiempo:</span>
+            <span class="value">{{ presentationTime }}</span>
+          </div>
         </div>
       </div>
-      <div class="no-data" *ngIf="!location">
-        <p>No hay datos de ubicación</p>
+      
+      <div class="manual-controls">
+        <ion-button (click)="previousSlide()" color="warning" fill="outline">
+          <ion-icon slot="start" name="play-back"></ion-icon>
+          Anterior
+        </ion-button>
+        <ion-button (click)="nextSlide()" color="warning">
+          <ion-icon slot="start" name="play-forward"></ion-icon>
+          Siguiente
+        </ion-button>
       </div>
-      <ion-button expand="block" (click)="getLocation()" class="sensor-button">
-        <ion-icon slot="start" name="locate"></ion-icon>
-        Obtener Ubicación
-      </ion-button>
     </div>
 
-    <!-- Giroscopio -->
+    <!-- Control por Movimiento -->
     <div class="sensor-card">
       <div class="sensor-header">
-        <ion-icon name="compass"></ion-icon>
-        <h3>Giroscopio</h3>
+        <ion-icon name="phone-portrait"></ion-icon>
+        <h3>Control por Movimiento</h3>
       </div>
-      <div class="sensor-data" *ngIf="gyroscope">
-        <div class="data-item">
-          <span class="label">Eje X:</span>
-          <span class="value">{{ gyroscope.x.toFixed(3) }}</span>
-        </div>
-        <div class="data-item">
-          <span class="label">Eje Y:</span>
-          <span class="value">{{ gyroscope.y.toFixed(3) }}</span>
-        </div>
-        <div class="data-item">
-          <span class="label">Eje Z:</span>
-          <span class="value">{{ gyroscope.z.toFixed(3) }}</span>
-        </div>
-      </div>
-      <div class="no-data" *ngIf="!gyroscope">
-        <p>No hay datos del giroscopio</p>
-      </div>
-      <ion-button expand="block" (click)="toggleGyroscope()" [color]="isGyroActive ? 'danger' : 'primary'" class="sensor-button">
+      
+      <ion-button expand="block" (click)="isGyroActive ? toggleGyroscope() : toggleGyroscope()" 
+                  [color]="isGyroActive ? 'danger' : 'warning'" class="control-button">
         <ion-icon slot="start" [name]="isGyroActive ? 'stop-circle' : 'play-circle'"></ion-icon>
-        {{ isGyroActive ? 'Detener' : 'Iniciar' }} Giroscopio
+        {{ isGyroActive ? 'Detener Control' : 'Activar Control' }}
       </ion-button>
+
+      <div class="instruction-card">
+        <div class="instruction-item">
+          <ion-icon name="arrow-forward" color="warning"></ion-icon>
+          <p>Inclina el celular a la <strong>derecha</strong> → Siguiente diapositiva</p>
+        </div>
+        <div class="instruction-item">
+          <ion-icon name="arrow-back" color="warning"></ion-icon>
+          <p>Inclina el celular a la <strong>izquierda</strong> → Diapositiva anterior</p>
+        </div>
+        <div class="instruction-item">
+          <ion-icon name="hand-left" color="warning"></ion-icon>
+          <p>Mantén el celular <strong>horizontal</strong> para no cambiar</p>
+        </div>
+      </div>
+
+      <div *ngIf="gyroscope" class="sensor-data">
+        <div class="data-item">
+          <span class="label">Inclinación Y:</span>
+          <span class="value">{{ gyroscope.y?.toFixed(1) }}°</span>
+        </div>
+        <div class="gesture-status" *ngIf="lastGesture">
+          <ion-badge color="warning">
+            {{ lastGesture === 'right' ? '→ Siguiente' : lastGesture === 'left' ? '← Anterior' : 'Mantener' }}
+          </ion-badge>
+        </div>
+      </div>
     </div>
 
     <!-- Acelerómetro -->

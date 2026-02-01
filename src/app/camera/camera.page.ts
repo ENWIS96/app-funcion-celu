@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { addIcons } from 'ionicons';
-import { camera, images, imagesOutline } from 'ionicons/icons';
+import { camera, qrCode, imagesOutline, qrCodeOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-camera',
@@ -17,7 +17,7 @@ export class CameraPage implements OnInit {
   capturedPhoto: string | undefined;
 
   constructor() {
-    addIcons({ camera, images, imagesOutline });
+    addIcons({ camera, qrCode, imagesOutline, qrCodeOutline });
   }
 
   ngOnInit() {
